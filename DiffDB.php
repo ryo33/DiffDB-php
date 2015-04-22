@@ -3,8 +3,12 @@
 class DiffDB{
 
     private $tables;
+    private $prefix;
+    private $con;
 
-    function __construct($con){
+    function __construct($con, $prefix='diffdb_'){
+        $this->con = $con;
+        $this->prefix = $prefix;
         $this->tables = [];
     }
 
@@ -29,6 +33,25 @@ class DiffDB{
     }
 
     function updateDB($truncate=true){
+        $this->con->execute(<<<SQL
+CREATE TABLE IF NOT EXISTS `{$this->prefix}table`(
+`name` VARCHAR(64) PRIMARY KEY,
+);
+CREATE TABLE IF NOT EXISTS `{$this->prefix}column`(
+`id` INTEGER PRIMARY KEY,
+`name` VARCHAR(64),
+`structure` VARCHAR(128),
+`table_name` VARCHAR(64)
+);
+SQL
+        );
+        $old_table_names = $this->con->fetchColumnAll("SELECT `name` FROM `{$this->prefix}table`;");
+        foreach($old_table_names as $old_table_name){
+            $columns = $this->con->fetchAll("SELECT `name`, `structure` FROM `{$this->prefix}column` WHERE `table_name` = ?", $old_table_name);
+            foreach($columns as $column){
+                $old_tables[$old_table_name][$column['name']] = $column['structure'];
+            }
+        }
     }
 
 }
