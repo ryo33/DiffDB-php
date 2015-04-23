@@ -36,7 +36,7 @@ class DiffDB{
         return [$add, $old, $change]; //added, deleted, changed columns
     }
 
-    function updateDB($truncate=true){
+    function updateDB($option=[]){
         $new_tables = $this->tables;
         $this->con->exec(<<<SQL
 CREATE TABLE IF NOT EXISTS `{$this->prefix}table`(
@@ -63,7 +63,7 @@ SQL
                 //update table
                 $result = $this->diffTable($old_table, $new_tables[$key]);
                 if(count($result[0]) or count($result[1]) or count($result[2])){
-                    if($truncate){
+                    if(isset($option['truncate']) and $option['truncate']){
                         $this->con->execute("TRUNCATE TABLE `$key`");
                     }
                     foreach($result[1] as $deleted_name => $deleted){
@@ -80,7 +80,7 @@ SQL
                     }
                 }
                 unset($new_tables[$key]);
-            }else{
+            }else if(isset($option['delete']) and $option['delete']){
                 //delete table
                 $this->con->execute("DROP TABLE `$key`;");
                 $this->con->execute("DELETE FROM `{$this->prefix}table` WHERE `name` = ?", $key);
