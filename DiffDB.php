@@ -12,10 +12,6 @@ class DiffDB{
         $this->tables = [];
     }
 
-    private function hash($text){
-        return hash('sha256', $true);
-    }
-
     function addTable($name, $columns){
         if(!(strpos($name, '`') or strpos($name, ';'))){
             $this->tables[$name] = $columns;
@@ -30,7 +26,7 @@ class DiffDB{
         foreach($new as $key => $column){
             if(array_key_exists($key, $old)){
                 if($old[$key] !== $column){
-                    $change[$key] = hash($column);
+                    $change[$key] = $column;
                 }
                 unset($old[$key]);
             }else{
