@@ -1,7 +1,6 @@
 # DiffDB-php
 This gets diffs of database structure and updates it.  
 ====
-###Description
 ###Requirement
 [EasySql](https://github.com/ryo33/ryo33PHPlib)
 ###Installation
