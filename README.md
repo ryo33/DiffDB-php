@@ -27,7 +27,7 @@ Comment out the `$ddb->updateDB()` When you don't need updating.
 You can specify some options like this when calling `$ddb->updateDB()`.  
 ```
 $ddb->updateDB([
-    'drop' => false, //If it's true and remove `$dbb->addTable(...)`, DiffDB drops the table.
+    'drop' => false, //If it's true and `$dbb->addTable(...)` is removed, DiffDB drops the table.
     'truncate' => false //If it's true, DiffDB truncates tables updated columns
 ]);
 ```
