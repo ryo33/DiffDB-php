@@ -80,7 +80,7 @@ SQL
                     }
                 }
                 unset($new_tables[$key]);
-            }else if(isset($option['delete']) and $option['delete']){
+            }else if(isset($option['drop']) and $option['drop']){
                 //delete table
                 $this->con->execute("DROP TABLE `$key`;");
                 $this->con->execute("DELETE FROM `{$this->prefix}table` WHERE `name` = ?", $key);
