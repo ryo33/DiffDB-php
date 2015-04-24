@@ -90,7 +90,7 @@ SQL
         foreach($new_tables as $key => $new_table){
             $columns = [];
             foreach($new_table as $key2 => $column){
-                $columns[] = $key2 . ' ' . $column;
+                $columns[] = '`' . $key2 . '` ' . $column;
             }
             $this->con->execute("CREATE TABLE `$key`(" . implode(', ', $columns) . ');');
             $this->con->insert($this->prefix . 'table', ['name' => $key]);
