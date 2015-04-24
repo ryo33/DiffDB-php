@@ -9,9 +9,9 @@ or
 `git submodule add https://github.com/ryo33/DiffDB-php diffdb`
 ###Usage
 Just do:  
-1. Creating DiffDB object
-2. Registering tables
-3. Calling `updateDB()`
+1. Create a DiffDB instance  
+2. Register tables  
+3. Call a method "updateDB"  
 #Example
 ```php
 //$con = new EasySql("DSN", "USERNAME", "PASSWORD");
