@@ -12,7 +12,7 @@ Just do:
 1. Create a DiffDB instance  
 2. Register tables  
 3. Call a method "updateDB"  
-#Example
+####Example
 ```php
 //$con = new EasySql("DSN", "USERNAME", "PASSWORD");
 $ddb = new DiffDB($con);
@@ -29,7 +29,7 @@ $ddb->addTable('test_table2', [
 $ddb->updateDB();
 ```
 Comment out the `$ddb->updateDB()` When you don't need updating.  
-#Options
+####Options
 You can specify some options like this when calling `$ddb->updateDB()`.  
 ```php
 $ddb->updateDB([
